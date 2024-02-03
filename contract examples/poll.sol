@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity >0.8.21;
+pragma solidity >0.8.19;
 
 struct Option {
     // TODO: Change name type from string to byte32
@@ -23,11 +23,11 @@ struct Vote {
 contract poll {
     address public owner;
     /* 
-    TODO: Can I remove "CurrentVoting" var and replace for using "votings.length - 1" instead of
+    TODO: Can I remove "CurrentVoting" var and replace for using "polls.length - 1" instead of
     checking this variable? 
     */
     uint public currentVoting = 0;
-    Voting[] public votings;
+    Voting[] public polls;
     mapping(uint => mapping(address => Vote[])) private votes;
 
     constructor(){
@@ -35,7 +35,7 @@ contract poll {
     }
 
     function getCurrentVoting() public view returns (Voting memory) {
-        return votings[currentVoting];
+        return polls[currentVoting];
     }
 
     function addVoting(string[] memory optionsName, uint timeToVote, bool multiVote) public {
@@ -45,9 +45,9 @@ contract poll {
         TODO : Can I avoid using "arrays.push()" and instead use a fixed lenght array?       
         */
         require(optionsName.length >= 1 && optionsName.length <= 4, "Number of options must be between 1 and 4");
-        votings.push();
-        currentVoting = votings.length - 1;
-        Voting storage newVoting = votings[votings.length - 1];
+        polls.push();
+        currentVoting = polls.length - 1;
+        Voting storage newVoting = polls[polls.length - 1];
         newVoting.creator = msg.sender;
         Option memory noOption = Option({
             name: "no/none",
@@ -70,12 +70,12 @@ contract poll {
     }
 
     function getOptionsLength() private view returns (uint) {
-    return votings[currentVoting].options.length;
+    return polls[currentVoting].options.length;
     }
 
     function vote(uint choice) public {
         require(choice < getOptionsLength(), "Invalid vote");
-        require(getCurrentVoting().maxDate > block.timestamp, "No open votings");
+        require(getCurrentVoting().maxDate > block.timestamp, "No open polls");
         if (!getCurrentVoting().multi) {
         require(votes[currentVoting][msg.sender].length == 0, "You can't vote again");
     }
@@ -84,16 +84,16 @@ contract poll {
         date: block.timestamp
     });
     votes[currentVoting][msg.sender].push(newVote);
-    votings[currentVoting].options[choice].votes++;
+    polls[currentVoting].options[choice].votes++;
     }
 
     function getVotingResults(uint votingIndex) public view returns (Option[] memory) {
-    require(votingIndex < votings.length, "Invalid voting index");
-    return votings[votingIndex].options;
+    require(votingIndex < polls.length, "Invalid voting index");
+    return polls[votingIndex].options;
     }
 
     function getMyVotes(uint votingIndex) public view returns (Vote[] memory) {
-    require(votingIndex < votings.length, "Invalid voting index");
+    require(votingIndex < polls.length, "Invalid voting index");
     return votes[votingIndex][msg.sender];
     }
 }
