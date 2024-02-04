@@ -1,95 +1,51 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+
+import Head from "next/head";
+
+//TODO: Make css more responsive.  
 
 export default function Home() {
+  
+  function btnLoginClick(){
+    console.log("click")
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Head>
+        <title>Poll Dapp | Login</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <div className="container col-xxl-8 px-2 py-2 text-white">
+        <div className="row flex-lg-row-reverse align-itens-center g-2 py-2 g-lg-3">
+          <div className="col-12 col-sm-8 col-lg-6">
+            <img src="/imgs/daoVoting.jpg" className="d-block mx-lg-auto img-fluid" />
+          </div>
+          <div className="col-12 col-sm-8 col-lg-6">
+            <div className="d-grid gap-2 mb-4 d-md-flex flex-md-column justify-content-md-start">
+              <h1 className="display-5 fw-bold lh-1 mb-5">DAO voting system</h1>
+              <p className="lead">Create polls and cast votes on chain!</p>
+              <p className="lead">You can easily create polls that are auditable, with all the security and transparency that a blockchain can provide.</p>
+              <p className="lead">Another advantage of using blockchains to create voting polls is the immutability of data, which ensures that once a vote is cast, it cannot be altered or tampered with.</p>
+            </div>
+            <div className="d-grid gap-2 d-md-flex flex-md-column justify-content-md-start">
+              <p className="lead mb-2">Authenticate with your metamask wallet:</p>
+              <button type="button" onClick={btnLoginClick} className="hover-button btn-primary bg-primary btn-lg fw-bold fs-4 px-4 me-md-2">
+                <img src="/imgs/metamask.svg" width={64} className="me-3" />
+                Connect with metamask
+              </button>
+            </div>
+          </div>
         </div>
+        <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <p className="col-md-4 mb-0 text-info">&copy; 2024 | lucas7x</p>
+          <ul className="nav col-md-4 justify-content-end">
+            <li className="nav-item"><a href="/" className="nav-link px-2 text-info">Home</a></li>
+            <li className="nav-item"><a href="https://lucas7x.win" className="nav-link px-2 text-info">About</a></li>
+          </ul>
+        </footer>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </>
   );
 }

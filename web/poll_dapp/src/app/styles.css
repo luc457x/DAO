@@ -1,0 +1,23 @@
+/* Imports */
+@font-face {
+    font-family: "zekton rg";
+    src: url(/fonts/zekton_rg.otf) format('opentype');
+}
+
+/* Classes */
+.bg-dark-blue {
+    background-color: #130025;
+  }
+
+.hover-button:hover {
+    background-color: #C724B1 !important;
+}
+
+/* Elements */
+body {
+    background-color: #000125;
+}
+
+div {
+    font-family: "zekton rg";
+}
